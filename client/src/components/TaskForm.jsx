@@ -1,14 +1,6 @@
 import { Navbar } from "./Navbar";
-import {
-  Button,
-  Container,
-  Card,
-  CardContent,
-  Grid,
-  TextField,
-  Typography,
-  CircularProgress,
-} from "@mui/material";
+import { TaskFormV2 } from "./TaskFormV2";
+import { Button, Container, Card, CardContent, Grid, TextField, Typography, CircularProgress } from "@mui/material";
 import { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 
@@ -73,18 +65,14 @@ export const TaskForm = () => {
   return (
     <>
       <Navbar editing={editing} />
-      <Container>
-        <Grid
-          container
-          direction="column"
-          alignItems="center"
-          justifyContent="center"
-        >
-          <Grid item xs={3}>
-            <Card
-              sx={{ mt: 5 }}
-              style={{ backgroundColor: "#1e272e", padding: "1rem" }}
-            >
+
+      <Container className="mt-10">
+        <Grid container direction="column" alignItems="center" justifyContent="center">
+          <Grid className="flex flex-wrap justify-center gap-8 ">
+            <div className="flex justify-center mt-5">
+              <TaskFormV2 />
+            </div>
+            <Card style={{ backgroundColor: "#1e272e", padding: "1rem" }}>
               <Typography variant="5" textAlign="center" color="white">
                 {editing ? "Update Task" : "Create Task"}
               </Typography>
@@ -120,17 +108,8 @@ export const TaskForm = () => {
                     onChange={handleChange}
                   />
 
-                  <Button
-                    variant="contained"
-                    color="primary"
-                    type="submit"
-                    disabled={!task.title && !task.description}
-                  >
-                    {loading ? (
-                      <CircularProgress color="inherit" size={24} />
-                    ) : (
-                      `${editing ? "update" : "create"}`
-                    )}
+                  <Button variant="contained" color="primary" type="submit" disabled={!task.title && !task.description}>
+                    {loading ? <CircularProgress color="inherit" size={24} /> : `${editing ? "update" : "create"}`}
                   </Button>
                 </form>
               </CardContent>
