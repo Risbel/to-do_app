@@ -12,14 +12,16 @@ export const TaskFormV2 = () => {
   };
 
   return (
-    <div className="flex flex-col justify-between py-10 p-4 my-4 border rounded-md">
+    <div className="flex flex-col justify-between py-10 p-4 my-4 border border-slate-400 rounded-md bg-slate-900">
       <h1 className="text-2xl">Form with react-hook-form</h1>
 
       <form onSubmit={handleSubmit(customSubmit)} className="grid gap-4">
-        <div className="flex flex-col">
-          <label>Title</label>
+        <div className="flex flex-col text-slate-300">
+          <label className="font-semibold">Title</label>
           <input
-            className="px-2 rounded-md text-black"
+            autocomplete="off"
+            placeholder="write your title"
+            className="px-2 rounded-md text-black bg-slate-100"
             type="text"
             {...register("title", { required: true, maxLength: 10 })}
           />
@@ -30,13 +32,18 @@ export const TaskFormV2 = () => {
             <span className="text-red-500 text-xs">El campo no puede exeder en los 10 caracteres</span>
           )}
         </div>
-        <div className="flex flex-col">
-          <label>Description</label>
-          <input
-            className="px-2 rounded-md text-black"
+        <div className="flex flex-col text-slate-300">
+          <label className="font-semibold">Description</label>
+          <textarea
+            rows="4"
+            cols="30"
+            autocomplete="off"
+            className="px-2 h-12 rounded-md text-black bg-slate-100"
             type="text"
-            {...register("description", { required: true, maxLength: 30 })}
-          />
+            {...register("description", { required: true, maxLength: 100 })}
+            placeholder="write your task"
+          ></textarea>
+
           {errors.description?.type === "required" && (
             <span className="text-red-500 text-xs">El campo no puede estar vacio</span>
           )}
