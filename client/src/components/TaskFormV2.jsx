@@ -37,7 +37,7 @@ export const TaskFormV2 = () => {
           <textarea
             rows="4"
             cols="30"
-            autocomplete="off"
+            autoComplete="off"
             className="px-2 h-12 rounded-md text-black bg-slate-100"
             type="text"
             {...register("description", { required: true, maxLength: 100 })}

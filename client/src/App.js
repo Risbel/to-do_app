@@ -1,14 +1,14 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { TaskForm } from "./components/TaskForm";
-import { TaskList } from "./components/TaskList";
+import { TasksList } from "./components/TasksList";
 
 const App = () => {
   return (
     <Router>
       <Routes>
-        <Route path="/" element={<TaskList />} />
-        <Route path="/tasks/new" element={<TaskForm />} />
-        <Route path="/tasks/:id/edit" element={<TaskForm />} />
+        <Route path="/" element={<TasksList />} />
+        <Route path="/new" element={<TaskForm />} />
+        <Route path="/:id/edit" element={<TaskForm />} />
       </Routes>
     </Router>
   );

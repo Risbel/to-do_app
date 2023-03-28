@@ -1,11 +1,4 @@
-import {
-  AppBar,
-  Box,
-  Button,
-  Container,
-  Toolbar,
-  Typography,
-} from "@mui/material";
+import { AppBar, Box, Button, Container, Toolbar, Typography } from "@mui/material";
 import { Link, useNavigate } from "react-router-dom";
 
 export const Navbar = ({ editing }) => {
@@ -23,11 +16,7 @@ export const Navbar = ({ editing }) => {
             </Typography>
 
             {!editing && (
-              <Button
-                variant="contained"
-                color="primary"
-                onClick={() => navigate("/tasks/new")}
-              >
+              <Button variant="contained" color="primary" onClick={() => navigate("/new")}>
                 New task
               </Button>
             )}

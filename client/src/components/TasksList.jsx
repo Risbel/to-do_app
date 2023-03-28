@@ -1,41 +1,48 @@
 import { Navbar } from "./Navbar";
-import { useEffect } from "react";
-import { useState } from "react";
-import {
-  Button,
-  Card,
-  CardContent,
-  Container,
-  Typography,
-} from "@mui/material";
+import { useQuery } from "@tanstack/react-query";
+import { getTasks } from "../services/tasks";
+
+import { Button, Card, CardContent, Container, Typography } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 
-export const TaskList = () => {
-  const [tasks, setTasks] = useState([]);
+export const TasksList = () => {
   const navigate = useNavigate();
 
-  const loadTask = async () => {
-    const response = await fetch("http://localhost:4000/tasks");
-    const data = await response.json();
-    setTasks(data);
-  };
+  const {
+    isLoading,
+    data: tasks,
+    isError,
+    error,
+  } = useQuery({
+    queryKey: ["tasks"],
+    queryFn: getTasks,
+  });
+
+  if (isLoading) return <div>Loading...</div>;
+  else if (isError) return <div>Error: {error.message}</div>;
+
+  // const [tasks, setTasks] = useState([]);
+
+  // const loadTask = async () => {
+  //   const data = getTasks();
+  //   setTasks(data);
+  // };
 
   const handleDelete = async (id) => {
     await fetch(`http://localhost:4000/tasks/${id}`, {
       method: "DELETE",
     });
 
-    setTasks(tasks.filter((task) => task.id !== id));
+    // setTasks(tasks.filter((task) => task.id !== id));
   };
 
-  useEffect(() => {
-    loadTask();
-  }, []);
+  // useEffect(() => {
+  //   loadTask();
+  // }, []);
 
   return (
     <>
       <Navbar />
-
       <Container>
         <h1>TaskList</h1>
 
