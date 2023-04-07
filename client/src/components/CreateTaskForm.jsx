@@ -1,19 +1,19 @@
+import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { createTask } from "../services/tasks";
-import { useNavigate } from "react-router-dom";
 
-export const TaskFormV2 = () => {
+const tasksSchema = z.object({
+  title: z.string().max(15).nonempty("Required").min(2),
+  description: z.string().max(50).nonempty("Required").min(2),
+});
+
+const CreateTaskForm = () => {
   const navigate = useNavigate();
   const queryClient = useQueryClient();
-
-  const tasksSchema = z.object({
-    title: z.string().max(15).nonempty("Required").min(2),
-    description: z.string().max(50).nonempty("Required").min(2),
-  });
 
   const {
     register,
@@ -32,7 +32,6 @@ export const TaskFormV2 = () => {
   const onSubmit = (task) => {
     addTasksMutation.mutate(task);
   };
-
   return (
     <div className="flex flex-col justify-between py-10 p-4 my-4 border border-slate-400 rounded-md bg-slate-900">
       <h1 className="text-2xl">Form with react-hook-form</h1>
@@ -69,3 +68,5 @@ export const TaskFormV2 = () => {
     </div>
   );
 };
+
+export default CreateTaskForm;

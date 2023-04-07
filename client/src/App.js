@@ -1,16 +1,21 @@
+import { lazy, Suspense } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import { TaskForm } from "./components/TaskForm";
-import { TasksList } from "./components/TasksList";
+
+const CreateTaskPage = lazy(() => import("./pages/CreateTaskPage"));
+const EditTaskPage = lazy(() => import("./pages/EditTaskPage"));
+const TasksListPage = lazy(() => import("./pages/TasksListPage"));
 
 const App = () => {
   return (
-    <Router>
-      <Routes>
-        <Route path="/" element={<TasksList />} />
-        <Route path="/new" element={<TaskForm />} />
-        <Route path="/:id/edit" element={<TaskForm />} />
-      </Routes>
-    </Router>
+    <Suspense fallback={<>Loading...</>}>
+      <Router>
+        <Routes>
+          <Route path="/" element={<TasksListPage />} />
+          <Route path="/new" element={<CreateTaskPage />} />
+          <Route path="/:id/edit" element={<EditTaskPage />} />
+        </Routes>
+      </Router>
+    </Suspense>
   );
 };
 
